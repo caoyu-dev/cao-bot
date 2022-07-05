@@ -1,22 +1,34 @@
-package com.caobot;
+package com.caobot.application;
 
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.events.application.ApplicationCommandUpdateEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Nonnull;
 import javax.security.auth.login.LoginException;
 
-public class CaoBot extends ListenerAdapter {
-    public static void main(String[] args) throws LoginException
-    {
-        // application.yml 에 token 저장
-        String bot_token = "OTkxMDA3ODkyNDk4OTY4NjM2.GWxgsD.D45VodIk4J3GpxrZOBoja9zTH7vJCuIFcC2Ko0";
+@Service
+public class MessageService extends ListenerAdapter {
+    private static String bot_token;
+
+    @Value("${user.token}")
+    private void setBotToken(String value) {
+        this.bot_token = value;
+    }
+
+    public static void CaoBotLoad() throws LoginException, InterruptedException {
         JDA jda = JDABuilder.createDefault(AccountType.BOT.name())
                 .setToken(bot_token)
-                .addEventListeners(new CaoBot())
+                .addEventListeners(new MessageService())
                 .build();
+
+        jda.awaitReady();
+        System.out.println("Finished Building JDA!");
     }
 
     @Override
@@ -29,5 +41,11 @@ public class CaoBot extends ListenerAdapter {
         if(event.getMessage().getContentRaw().equals("!name")) {
             event.getChannel().sendMessage("cao-bot").queue();
         }
+    }
+
+    @Override
+    public void onApplicationCommandUpdate(ApplicationCommandUpdateEvent event)
+    {
+
     }
 }
