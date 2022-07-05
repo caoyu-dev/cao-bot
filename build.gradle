@@ -16,9 +16,17 @@ configurations {
 
 repositories {
 	mavenCentral()
+	// repository maven 설정
+	maven {
+		name 'm2-dv8tion'
+		url 'https://m2.dv8tion.net/releases'
+	}
 }
 
 dependencies {
+	// bot 관련 dependencies 추가
+	implementation("net.dv8tion:JDA:4.3.0_277")
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
