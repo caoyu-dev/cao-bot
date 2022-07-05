@@ -12,7 +12,7 @@ public class CaoBot extends ListenerAdapter {
     public static void main(String[] args) throws LoginException
     {
         // application.yml 에 token 저장
-        String bot_token = "token";
+        String bot_token = "OTkxMDA3ODkyNDk4OTY4NjM2.GWxgsD.D45VodIk4J3GpxrZOBoja9zTH7vJCuIFcC2Ko0";
         JDA jda = JDABuilder.createDefault(AccountType.BOT.name())
                 .setToken(bot_token)
                 .addEventListeners(new CaoBot())
