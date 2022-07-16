@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CaoBotController {
     @GetMapping("/start")
-    public void startCaoBot(){
+    public void startCaoBot() {
         CaoBotConnection.start();
     }
 
-//    @GetMapping("/stop")
-//    public void stopCaoBot(){
-//        BotConnection.stop();
-//    }
+    @GetMapping("/stop")
+    public void stopCaoBot(){
+        CaoBotConnection.stop();
+    }
 }
